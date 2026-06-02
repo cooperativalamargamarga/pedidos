@@ -7,7 +7,7 @@ Página web de pedidos para clientes mayoristas de Cooperativa La Marga Marga.
 Configurar en Netlify → Site settings → Environment variables:
 
 - `AIRTABLE_TOKEN` — Personal Access Token de Airtable
-- `AIRTABLE_BASE_ID` — ID de la base (appv9d2XHjZepmiuQ)
+- `AIRTABLE_BASE_ID` — ID de la base (configurar en Netlify)
 
 ## Estructura
 
