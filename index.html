@@ -681,7 +681,7 @@
 <header>
   <div class="logo-area">
     <h1>La Marga Marga</h1>
-    <p>Pedidos empresas<br>Panadería Masa madre · Repostería Artesanal</p>
+    <p>Pedidos mayorista · Masa madre</p>
   </div>
   <button class="cart-btn" onclick="scrollToCart()">
     🧺 Carrito <span class="cart-count" id="cartCount">0</span>
@@ -690,11 +690,11 @@
 
 <div class="hero">
   <div class="hero-inner">
-    <h2>Pedido de la semana</h2>
-    <p>Selecciona los productos que necesitas. El pedido mínimo es $35.000 neto. <br>Despachos días miércoles y viernes según disponibilidad. <br>Despachos Viña del Mar y Valparaíso (entre las 15:00 y 19:00 hrs), consultar por otras zonas.</p>
+    <h2>Pedido<br>de la semana</h2>
+    <p>Selecciona los productos que necesitas. El pedido mínimo es $35.000 neto. Los despachos son los miércoles y viernes según disponibilidad.</p>
     <div class="hero-meta">
-      <span class="hero-tag">🍞 Masa madre natural</span>
-      <span class="hero-tag">🌿 Apto dieta vegana</span>
+      <span class="hero-tag">🌿 Todo vegetal</span>
+      <span class="hero-tag">🍞 Fermentación natural</span>
       <span class="hero-tag">📦 Pedido mínimo $35.000</span>
       <span class="hero-tag">🚚 Gratis sobre $45.000</span>
     </div>
@@ -800,7 +800,9 @@
 </div>
 
 <script>
-// Token y credenciales gestionadas por Netlify Function (no visibles aquí)
+const AIRTABLE_TOKEN = 'patHxF3D6A4u5XM30.4138ca54a94faf900b61173d78f2a66f5065873e6c724da4071249cc26c27ef1';
+const BASE_ID = 'appv9d2XHjZepmiuQ';
+const TABLE_NAME = 'PEDIDOS';
 
 // Función para obtener semana actual
 function getSemana() {
@@ -824,37 +826,37 @@ const CLIENTES = [
 ];
 
 const PRODUCTOS = [
-  { id: "Blanco Molde", nombre: "BLANCO MOLDE", precio: 2900, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/molde blanco.jpg' },
-  { id: "Blanco Hogaza", nombre: "BLANCO HOGAZA", precio: 2900, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/hogaza blanca.jpg' },
-  { id: "Blanco Semilla Molde", nombre: "BLANCO SEMILLA MOLDE", precio: 3150, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/molde blanco semilla.jpg' },
-  { id: "Blanco Semilla Hogaza", nombre: "BLANCO SEMILLA HOGAZA", precio: 3150, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/hogaza semilla.jpg' },
-  { id: "Integral Molde", nombre: "INTEGRAL MOLDE", precio: 2900, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/integral.jpg' },
-  { id: "Integral Semilla Molde", nombre: "INTEGRAL SEMILLA MOLDE", precio: 3150, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/integral-semilla.jpg' },
-  { id: "Centeno", nombre: "CENTENO", precio: 3150, cat: "Panadería", masaMadre: true, vegano: false, img: null },
-  { id: "Barra Aceituna", nombre: "BARRA ACEITUNA", precio: 2550, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/barraaceituna.jpg' },
-  { id: "Barra Nuez Cranberrie", nombre: "BARRA NUEZ CRANBERRIE", precio: 2750, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/barracran.jpg' },
-  { id: "Barra Sésamo", nombre: "BARRA SÉSAMO", precio: 2550, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/barrasesamo.jpg' },
-  { id: "Ciabatta", nombre: "CIABATTA", precio: 1250, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/ciabattas.jpg' },
-  { id: "Brioche Hamburguesa", nombre: "BRIOCHE HAMBURGUESA", precio: 695, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/brioche hamb.jpg' },
-  { id: "Brioche Completo", nombre: "BRIOCHE COMPLETO", precio: 695, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/brioche completo.jpg'},
-  { id: "Brioche Molde", nombre: "BRIOCHE MOLDE", precio: 2700, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/brioche molde.jpg' },
-  { id: "Baguette", nombre: "BAGUETTE", precio: 990, cat: "Panadería", masaMadre: true, vegano: true, img: '/imagenes/baguette.jpg' },
-  { id: "Pre Pizza", nombre: "PRE PIZZA", precio: 7500, cat: "Pizza y Focaccia", masaMadre: true, vegano: true, img: null },
-  { id: "Pizza 60x40", nombre: "PIZZA 60x40", precio: 18990, cat: "Pizza y Focaccia", masaMadre: true, masaMadre: true, vegano: false, img: null },
-  { id: "Focaccia 60x40 Plain", nombre: "FOCACCIA 60x40 PLAIN", precio: 8500, cat: "Pizza y Focaccia", masaMadre: true, vegano: true, img: '/imagenes/focaccia plain.jpg'},
-  { id: "Focaccia 60x40 Variedades", nombre: "FOCACCIA 60x40 VARIEDADES", precio: 10500, cat: "Pizza y Focaccia", masaMadre: true, vegano: false, img: null },
-  { id: "Galletón Chips", nombre: "GALLETÓN CHIPS", precio: 720, cat: "Repostería", masaMadre: false, vegano: true, img: '/imagenes/chips.jpg' },
-  { id: "Galletón Chocomani", nombre: "GALLETÓN CHOCOMANI", precio: 720, cat: "Repostería", masaMadre: false, vegano: true, img: '/imagenes/chocomani.jpg' },
-  { id: "Galletón Limón", nombre: "GALLETÓN LIMÓN", precio: 720, cat: "Repostería", masaMadre: false, vegano: true, img: '/imagenes/limon.jpg' },
-  { id: "Galletón Frambuesa", nombre: "GALLETÓN FRAMBUESA", precio: 990, cat: "Repostería", masaMadre: false, vegano: false, img: '/imagenes/frambuesa2.jpg' },
-  { id: "Galletón Capuccino", nombre: "GALLETÓN CAPUCCINO", precio: 990, cat: "Repostería", masaMadre: false, vegano: false, img: null },
-  { id: "Brownie", nombre: "BROWNIE", precio: 1250, cat: "Repostería", masaMadre: false, vegano: true, img: null },
-  { id: "Carrot Cake", nombre: "CARROT CAKE", precio: 1250, cat: "Repostería", masaMadre: false, vegano: true, img: null },
-  { id: "Granola Plátano 1K", nombre: "GRANOLA PLÁTANO 1K", precio: 7500, cat: "Repostería", masaMadre: false, vegano: true, img: '/imagenes/granolapla.jpg' },
-  { id: "Granola Manzana Canela 1K", nombre: "GRANOLA MANZANA CANELA 1K", precio: 7500, cat: "Repostería", masaMadre: false, vegano: true, img: null },
-  { id: "Granola Cacao 1K", nombre: "GRANOLA CACAO 1K", precio: 7500, cat: "Repostería", masaMadre: false, vegano: true, img: '/imagenes/granola1.jpg' },
-  { id: "Pan de Pascua Chico", nombre: "PAN DE PASCUA CHICO", precio: 3900, cat: "Repostería", masaMadre: false, vegano: true, img: '/imagenes/panpascuachico.jpg' },
-  { id: "Pan de Pascua Grande", nombre: "PAN DE PASCUA GRANDE", precio: 8900, cat: "Repostería", masaMadre: false, vegano: true, img: '/imagenes/panpascuagrande.jpg' },
+  { id: "Blanco Molde", nombre: "BLANCO MOLDE", precio: 2900, cat: "Panadería", vegano: true, img: null },
+  { id: "Blanco Hogaza", nombre: "BLANCO HOGAZA", precio: 2900, cat: "Panadería", vegano: true, img: null },
+  { id: "Blanco Semilla Molde", nombre: "BLANCO SEMILLA MOLDE", precio: 3150, cat: "Panadería", vegano: true, img: null },
+  { id: "Blanco Semilla Hogaza", nombre: "BLANCO SEMILLA HOGAZA", precio: 3150, cat: "Panadería", vegano: true, img: null },
+  { id: "Integral Molde", nombre: "INTEGRAL MOLDE", precio: 2900, cat: "Panadería", vegano: true, img: null },
+  { id: "Integral Semilla Molde", nombre: "INTEGRAL SEMILLA MOLDE", precio: 3150, cat: "Panadería", vegano: true, img: null },
+  { id: "Centeno", nombre: "CENTENO", precio: 3150, cat: "Panadería", vegano: false, img: null },
+  { id: "Barra Aceituna", nombre: "BARRA ACEITUNA", precio: 2550, cat: "Panadería", vegano: true, img: null },
+  { id: "Barra Nuez Cranberrie", nombre: "BARRA NUEZ CRANBERRIE", precio: 2750, cat: "Panadería", vegano: true, img: null },
+  { id: "Barra Sésamo", nombre: "BARRA SÉSAMO", precio: 2550, cat: "Panadería", vegano: true, img: null },
+  { id: "Ciabatta", nombre: "CIABATTA", precio: 1250, cat: "Panadería", vegano: true, img: null },
+  { id: "Brioche Hamburguesa", nombre: "BRIOCHE HAMBURGUESA", precio: 695, cat: "Panadería", vegano: true, img: null },
+  { id: "Brioche Completo", nombre: "BRIOCHE COMPLETO", precio: 695, cat: "Panadería", vegano: true, img: null },
+  { id: "Brioche Molde", nombre: "BRIOCHE MOLDE", precio: 2700, cat: "Panadería", vegano: true, img: null },
+  { id: "Baguette", nombre: "BAGUETTE", precio: 990, cat: "Panadería", vegano: true, img: null },
+  { id: "Pre Pizza", nombre: "PRE PIZZA", precio: 7500, cat: "Pizza y Focaccia", vegano: true, img: null },
+  { id: "Pizza 60x40", nombre: "PIZZA 60x40", precio: 18990, cat: "Pizza y Focaccia", vegano: false, img: null },
+  { id: "Focaccia 60x40 Plain", nombre: "FOCACCIA 60x40 PLAIN", precio: 8500, cat: "Pizza y Focaccia", vegano: true, img: null },
+  { id: "Focaccia 60x40 Variedades", nombre: "FOCACCIA 60x40 VARIEDADES", precio: 10500, cat: "Pizza y Focaccia", vegano: false, img: null },
+  { id: "Galletón Chips", nombre: "GALLETÓN CHIPS", precio: 720, cat: "Repostería", vegano: true, img: null },
+  { id: "Galletón Chocomani", nombre: "GALLETÓN CHOCOMANI", precio: 720, cat: "Repostería", vegano: true, img: null },
+  { id: "Galletón Limón", nombre: "GALLETÓN LIMÓN", precio: 720, cat: "Repostería", vegano: true, img: null },
+  { id: "Galletón Frambuesa", nombre: "GALLETÓN FRAMBUESA", precio: 990, cat: "Repostería", vegano: false, img: null },
+  { id: "Galletón Capuccino", nombre: "GALLETÓN CAPUCCINO", precio: 990, cat: "Repostería", vegano: false, img: null },
+  { id: "Brownie", nombre: "BROWNIE", precio: 1250, cat: "Repostería", vegano: true, img: null },
+  { id: "Carrot Cake", nombre: "CARROT CAKE", precio: 1250, cat: "Repostería", vegano: true, img: null },
+  { id: "Granola Plátano 1K", nombre: "GRANOLA PLÁTANO 1K", precio: 7500, cat: "Repostería", vegano: true, img: null },
+  { id: "Granola Manzana Canela 1K", nombre: "GRANOLA MANZANA CANELA 1K", precio: 7500, cat: "Repostería", vegano: true, img: null },
+  { id: "Granola Cacao 1K", nombre: "GRANOLA CACAO 1K", precio: 7500, cat: "Repostería", vegano: true, img: null },
+  { id: "Pan de Pascua Chico", nombre: "PAN DE PASCUA CHICO", precio: 3900, cat: "Repostería", vegano: true, img: null },
+  { id: "Pan de Pascua Grande", nombre: "PAN DE PASCUA GRANDE", precio: 8900, cat: "Repostería", vegano: true, img: null },
 ];
 
 const cart = {};
@@ -953,8 +955,7 @@ function renderCatalog() {
               <div class="product-info">
                 <div class="product-name">${p.nombre}</div>
                 <div class="product-price">${fmt(p.precio)} c/u</div>
-               ${p.vegano ? '<span class="product-vegano">🌿 Veg</span>' : ''}
-              ${p.masaMadre ? '<span class="product-vegano">🍞 MM natural</span>' : ''}
+                ${p.vegano ? '<span class="product-vegano">🌿 Vegano</span>' : ''}
                 <div class="qty-control">
                   <button class="qty-btn" onclick="setQty('${p.id}', (parseInt(document.getElementById('qty-${safeId}').value)||0)-1)">−</button>
                   <input class="qty-input" id="qty-${safeId}" type="number" min="0" value="" placeholder="0"
@@ -1049,9 +1050,12 @@ async function submitOrder() {
   });
 
   try {
-    const res = await fetch('/functions/submit-order', {
+    const res = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ fields })
     });
 
