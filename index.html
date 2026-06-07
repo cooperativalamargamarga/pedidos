@@ -681,7 +681,7 @@
 <header>
   <div class="logo-area">
     <h1>La Marga Marga</h1>
-    <p>Pedidos mayorista · Masa madre</p>
+    <p>Pedidos empresas <br> Masa madre natural · Repostería artesanal </p>
   </div>
   <button class="cart-btn" onclick="scrollToCart()">
     🧺 Carrito <span class="cart-count" id="cartCount">0</span>
@@ -690,11 +690,11 @@
 
 <div class="hero">
   <div class="hero-inner">
-    <h2>Pedido<br>de la semana</h2>
-    <p>Selecciona los productos que necesitas. El pedido mínimo es $35.000 neto. Los despachos son los miércoles y viernes según disponibilidad.</p>
+    <h2>Pedido de la semana</h2>
+    <p>Selecciona los productos que necesitas. El pedido mínimo es $35.000 neto. <br> Despachos desde Viña del mar a Valparaíso los días miércoles y viernes (entre las 15:00 y 19:00). <br>Consulta por otras zonas, o retira en nuestro local ubicado en Calle limache 1466, Viña del mar. </p>
     <div class="hero-meta">
-      <span class="hero-tag">🌿 Todo vegetal</span>
-      <span class="hero-tag">🍞 Fermentación natural</span>
+      <span class="hero-tag">🍞 Masa Madre natural (MM) </span>
+      <span class="hero-tag">🌿 Apto dieta vegana (Veg)</span>
       <span class="hero-tag">📦 Pedido mínimo $35.000</span>
       <span class="hero-tag">🚚 Gratis sobre $45.000</span>
     </div>
@@ -826,24 +826,22 @@ const CLIENTES = [
 ];
 
 const PRODUCTOS = [
-  { id: "Blanco Molde", nombre: "BLANCO MOLDE", precio: 2900, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/molde-blanco.jpg" },
-  { id: "Blanco Hogaza", nombre: "BLANCO HOGAZA", precio: 2900, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/hogaza-blanca.jpg" },
-  { id: "Blanco Semilla Molde", nombre: "BLANCO SEMILLA MOLDE", precio: 3150, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/molde-blanco-semilla.jpg" },
-  { id: "Blanco Semilla Hogaza", nombre: "BLANCO SEMILLA HOGAZA", precio: 3150, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/hogaza-semilla.jpg" },
+  { id: "Blanco Molde", nombre: "BLANCO MOLDE", precio: 2900, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/molde blanco.jpg" },
+  { id: "Blanco Hogaza", nombre: "BLANCO HOGAZA", precio: 2900, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/hogaza blanca.jpg" },
+  { id: "Blanco Semilla Molde", nombre: "BLANCO SEMILLA MOLDE", precio: 3150, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/molde blanco semilla.jpg" },
+  { id: "Blanco Semilla Hogaza", nombre: "BLANCO SEMILLA HOGAZA", precio: 3150, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/hogaza semilla.jpg" },
   { id: "Integral Molde", nombre: "INTEGRAL MOLDE", precio: 2900, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/integral.jpg" },
-  { id: "Integral Semilla Molde", nombre: "INTEGRAL SEMILLA MOLDE", precio: 3150, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/integral-semilla.jpg" },
+  { id: "Integral Semilla Molde", nombre: "INTEGRAL SEMILLA MOLDE", precio: 3150, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/integral semilla.jpg" },
   { id: "Centeno", nombre: "CENTENO", precio: 3150, cat: "Panadería", vegano: false, masaMadre: true, img: null },
   { id: "Barra Aceituna", nombre: "BARRA ACEITUNA", precio: 2550, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/barraaceituna.jpg" },
   { id: "Barra Nuez Cranberrie", nombre: "BARRA NUEZ CRANBERRIE", precio: 2750, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/barracran.jpg" },
   { id: "Barra Sésamo", nombre: "BARRA SÉSAMO", precio: 2550, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/barrasesamo.jpg" },
   { id: "Ciabatta", nombre: "CIABATTA", precio: 1250, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/ciabattas.jpg" },
-  { id: "Brioche Hamburguesa", nombre: "BRIOCHE HAMBURGUESA", precio: 695, cat: "Panadería", vegano: true, masaMadre: false, img: "/imagenes/brioche-hamb.jpg" },
-  { id: "Brioche Completo", nombre: "BRIOCHE COMPLETO", precio: 695, cat: "Panadería", vegano: true, masaMadre: false, img: "/imagenes/brioche-completo.jpg" },
-  { id: "Brioche Molde", nombre: "BRIOCHE MOLDE", precio: 2700, cat: "Panadería", vegano: true, masaMadre: false, img: "/imagenes/brioche-molde.jpg" },
+  { id: "Brioche Hamburguesa", nombre: "BRIOCHE HAMBURGUESA", precio: 695, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/brioche hamb.jpg" },
+  { id: "Brioche Completo", nombre: "BRIOCHE COMPLETO", precio: 695, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/brioche completo.jpg" },
+  { id: "Brioche Molde", nombre: "BRIOCHE MOLDE", precio: 2700, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/brioche molde.jpg" },
   { id: "Baguette", nombre: "BAGUETTE", precio: 990, cat: "Panadería", vegano: true, masaMadre: true, img: "/imagenes/baguette.jpg" },
-  { id: "Pre Pizza", nombre: "PRE PIZZA", precio: 7500, cat: "Pizza y Focaccia", vegano: true, masaMadre: true, img: null },
-  { id: "Pizza 60x40", nombre: "PIZZA 60x40", precio: 18990, cat: "Pizza y Focaccia", vegano: false, masaMadre: true, img: null },
-  { id: "Focaccia 60x40 Plain", nombre: "FOCACCIA 60x40 PLAIN", precio: 8500, cat: "Pizza y Focaccia", vegano: true, masaMadre: true, img: "/imagenes/focaccia-plain.jpg" },
+  { id: "Focaccia 60x40 Plain", nombre: "FOCACCIA 60x40 PLAIN", precio: 8500, cat: "Pizza y Focaccia", vegano: true, masaMadre: true, img: "/imagenes/focaccia plain.jpg" },
   { id: "Focaccia 60x40 Variedades", nombre: "FOCACCIA 60x40 VARIEDADES", precio: 10500, cat: "Pizza y Focaccia", vegano: false, masaMadre: true, img: null },
   { id: "Galletón Chips", nombre: "GALLETÓN CHIPS", precio: 720, cat: "Repostería", vegano: true, masaMadre: false, img: null },
   { id: "Galletón Chocomani", nombre: "GALLETÓN CHOCOMANI", precio: 720, cat: "Repostería", vegano: true, masaMadre: false, img: null },
