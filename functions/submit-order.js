@@ -1,30 +1,29 @@
-exports.handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
-
-  const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
-  const BASE_ID = process.env.AIRTABLE_BASE_ID;
+export async function onRequestPost(context) {
+  const AIRTABLE_TOKEN = context.env.AIRTABLE_TOKEN;
+  const BASE_ID = context.env.AIRTABLE_BASE_ID;
   const TABLE_NAME = 'PEDIDOS';
 
   if (!AIRTABLE_TOKEN || !BASE_ID) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Configuración del servidor incompleta.' })
-    };
+    return new Response(JSON.stringify({ error: 'Configuración incompleta.' }), {
+      status: 500, headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   let body;
   try {
-    body = JSON.parse(event.body);
+    body = await context.request.json();
   } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Solicitud inválida.' }) };
+    return new Response(JSON.stringify({ error: 'Solicitud inválida.' }), {
+      status: 400, headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   const { fields } = body;
 
   if (!fields) {
-    return { statusCode: 400, body: JSON.stringify({ error: 'Faltan datos del pedido.' }) };
+    return new Response(JSON.stringify({ error: 'Faltan datos del pedido.' }), {
+      status: 400, headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   try {
@@ -43,23 +42,18 @@ exports.handler = async (event) => {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error('Airtable error:', data);
-      return {
-        statusCode: response.status,
-        body: JSON.stringify({ error: data.error || 'Error al guardar en Airtable.' })
-      };
+      return new Response(JSON.stringify({ error: data.error || 'Error al guardar.' }), {
+        status: response.status, headers: { 'Content-Type': 'application/json' }
+      });
     }
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ success: true, id: data.id })
-    };
+    return new Response(JSON.stringify({ success: true, id: data.id }), {
+      status: 200, headers: { 'Content-Type': 'application/json' }
+    });
 
   } catch (err) {
-    console.error('Function error:', err);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Error interno del servidor.' })
-    };
+    return new Response(JSON.stringify({ error: 'Error interno.' }), {
+      status: 500, headers: { 'Content-Type': 'application/json' }
+    });
   }
-};
+}
