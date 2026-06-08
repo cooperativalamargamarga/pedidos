@@ -1074,12 +1074,15 @@ async function submitOrder() {
     const total = getTotal();
     const clienteNombre = cliente === 'nuevo' ? nuevoCliente : document.getElementById('clienteSelect').options[document.getElementById('clienteSelect').selectedIndex].text;
 
+    const fechaLegible = new Date().toLocaleDateString('es-CL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
     emailjs.send('service_009a59q', 'template_av8gj4m', {
       to_email: correo,
       cliente: clienteNombre,
       dia_despacho: dia,
       resumen_pedido: resumen,
       total: '$' + Math.round(total).toLocaleString('es-CL'),
+      fecha: fechaLegible,
     }).catch(err => console.warn('Email error:', err));
 
     document.getElementById('modalBody').style.display = 'none';
