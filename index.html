@@ -1070,7 +1070,7 @@ async function submitOrder() {
 
     // Enviar correo de confirmación
     const items = PRODUCTOS.filter(p => (cart[p.id] || 0) > 0);
-    const resumen = items.map(p => `${p.nombre} x${cart[p.id]} = $${Math.round(cart[p.id]*p.precio).toLocaleString('es-CL')}`).join('\n');
+    const resumen = items.map(p => `${p.nombre} x${cart[p.id]} · $${Math.round(p.precio).toLocaleString('es-CL')} c/u = $${Math.round(cart[p.id]*p.precio).toLocaleString('es-CL')}`).join('\n');
     const total = getTotal();
     const clienteNombre = cliente === 'nuevo' ? nuevoCliente : document.getElementById('clienteSelect').options[document.getElementById('clienteSelect').selectedIndex].text;
 
