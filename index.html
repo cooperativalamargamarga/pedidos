@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pedidos Mayorista — La Marga Marga</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init("UMYXMGvLAvZaqIj_0");</script>
 <style>
   :root {
     --cream: #F5EFE6;
@@ -1024,8 +1026,10 @@ async function submitOrder() {
   btn.innerHTML = '<span class="loading-spinner"></span>Enviando...';
 
   // Construir campos para Airtable
+  const now = new Date().toISOString();
   const fields = {
     'Email': correo,
+    'Fecha pedido': now,
     'Día despacho': dia,
     'Semana': getSemana(),
     'Estado': 'Pendiente',
@@ -1063,6 +1067,20 @@ async function submitOrder() {
       console.error('Airtable error:', err);
       throw new Error('Error al enviar');
     }
+
+    // Enviar correo de confirmación
+    const items = PRODUCTOS.filter(p => (cart[p.id] || 0) > 0);
+    const resumen = items.map(p => `${p.nombre} x${cart[p.id]} = $${Math.round(cart[p.id]*p.precio).toLocaleString('es-CL')}`).join('\n');
+    const total = getTotal();
+    const clienteNombre = cliente === 'nuevo' ? nuevoCliente : document.getElementById('clienteSelect').options[document.getElementById('clienteSelect').selectedIndex].text;
+
+    emailjs.send('service_009a59q', 'template_av8gj4m', {
+      to_email: correo,
+      cliente: clienteNombre,
+      dia_despacho: dia,
+      resumen_pedido: resumen,
+      total: '$' + Math.round(total).toLocaleString('es-CL'),
+    }).catch(err => console.warn('Email error:', err));
 
     document.getElementById('modalBody').style.display = 'none';
     document.getElementById('modalHeader').style.display = 'none';
