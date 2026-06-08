@@ -1082,6 +1082,7 @@ async function submitOrder() {
       dia_despacho: dia,
       resumen_pedido: resumen,
       total: '$' + Math.round(total).toLocaleString('es-CL'),
+      total_iva: '$' + Math.round(total * 1.19).toLocaleString('es-CL'),
       fecha: fechaLegible,
     }).catch(err => console.warn('Email error:', err));
 
