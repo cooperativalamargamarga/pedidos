@@ -953,8 +953,8 @@ function renderCatalog() {
               <div class="product-info">
                 <div class="product-name">${p.nombre}</div>
                 <div class="product-price">${fmt(p.precio)} c/u</div>
-                ${p.Veg ? '<span class="product-vegano">🌿 Veg</span>' : ''}
                 ${p.MM ? '<span class="product-vegano">🍞 MM</span>' : ''}
+                 ${p.Veg ? '<span class="product-vegano">🌿 Veg</span>' : ''}
                 <div class="qty-control">
                   <button class="qty-btn" onclick="setQty('${p.id}', (parseInt(document.getElementById('qty-${safeId}').value)||0)-1)">−</button>
                   <input class="qty-input" id="qty-${safeId}" type="number" min="0" value="" placeholder="0"
